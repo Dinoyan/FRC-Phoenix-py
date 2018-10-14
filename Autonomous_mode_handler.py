@@ -6,5 +6,5 @@ class AutonomousModeHandler():
 		self.elevator = elevator
 		self.intake = intake
 
-	def AutoModeSelect(position):
+	def AutoModeSelect(self, position):
 		pass
