@@ -1,6 +1,7 @@
 import wpilib
 import drivetrain
 import elevator
+import intake
 import sensor_handler
 import Autonomous_mode_handler
 from wpilib.drive import DifferentialDrive
@@ -13,7 +14,9 @@ class MyRobot(wpilib.IterativeRobot):
         '''Robot-wide initialization code should go here'''
         self.drivetrain = drivetrain.Drivetrain()
         self.sensors = sensor_handler.sensorHandler()
-        self.auto = Autonomous_mode_handler.AutonomousModeHandler()
+        self.elevator = elevator.Elevator()
+        self.intakeHandler = intake.Intake()
+        self.auto = Autonomous_mode_handler.AutonomousModeHandler(self.drivetrain, self.sensors,self.elevator, self.intakeHandler)
 
         self.chooser = wpilib.SendableChooser()
         self.chooser.addObject('center', '1')
@@ -21,7 +24,7 @@ class MyRobot(wpilib.IterativeRobot):
         self.chooser.addObject('right', '3')
         self.chooser.addObject('default', '0')
 
-        wpilib.SmartDashboard.putData('Auto Mode', chooser)
+        wpilib.SmartDashboard.putData('Auto Mode', self.chooser)
 
 
     def autonomousInit(self):
@@ -29,11 +32,11 @@ class MyRobot(wpilib.IterativeRobot):
         self.sensors.driveEncReset()
         self.sensors.elevEncReset()
 
-        self.value = chooser.getSelected()
+        self.value = self.chooser.getSelected()
 
     def autonomousPeriodic(self):
         '''Called every 20ms in autonomous mode'''
-        auto.AutoModeSelect(self.value)
+        self.auto.AutoModeSelect(self.value)
 
     def disabledInit(self):
         '''Called only at the beginning of disabled mode'''
@@ -45,7 +48,9 @@ class MyRobot(wpilib.IterativeRobot):
 
     def teleopInit(self):
         '''Called only at the beginning of teleoperated mode'''
-        self.drivetrain.driveRobot()
+        self.drivetrain.autoMove()
+        self.intakeHandler.operateIntake()
+        self.elevator.operateElevator()
 
 
     def teleopPeriodic(self):
