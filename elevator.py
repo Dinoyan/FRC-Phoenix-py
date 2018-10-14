@@ -2,10 +2,10 @@ import wpilib
 import Joystick_handler
 import robot_map
 
-def Elevator():
+class Elevator():
 
 
-    def __inint__(self):
+    def __init__(self):
         self.elevCimOne = wpilib.Talon(robot_map.ELEV_ONE)
         self.elevCimTwo = wpilib.Talon(robot_map.ELEV_TWO)
         self.elevStick = wpilib.XboxController(1)
@@ -16,3 +16,4 @@ def Elevator():
 
     def emergencyStop(self):
         pass
+ 
