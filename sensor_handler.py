@@ -1,5 +1,6 @@
 import wpilib
 import robot_map
+from navx import AHRS
 
 class sensorHandler():
 
@@ -7,6 +8,7 @@ class sensorHandler():
 		self.leftEnc = wpilib.Encoder(robot_map.LEFT_ENC_ONE, robot_map.LEFT_ENC_TWO, True, wpilib.Encoder.EncodingType.k4X)
 		self.rightEnc = wpilib.Encoder(robot_map.RIGHT_ENC_ONE, robot_map.RIGHT_ENC_TWO, True, wpilib.Encoder.EncodingType.k4X)
 		self.elevatorEnc = wpilib.Encoder(robot_map.ELEVATOR_ENC_ONE, robot_map.ELEVATOR_ENC_TWO, False, wpilib.Encoder.EncodingType.k4X)
+		self.ahrs = AHRS.create_i2c()
 
 
 	def driveEncReset(self):
@@ -17,19 +19,22 @@ class sensorHandler():
 		self.elevatorEnc.reset()
 
 	def navxReset(self):
-		pass
+		self.ahrs.reset()
 
 	def getAhrs(self):
-		pass
+		return self.ahrs
+
+	def getCurrentAngle(self):
+		return ahrs.getAngle()
 
 	def getLeftDistance(self):
-		pass
+		return self.rightEnc.getDistance()
 
 	def getRightDistance(self):
-		pass
+		return self.leftEnc.getDistance()
 
 	def getElevDistance(self):
-		pass
+		return self.elevatorEnc.getDistance()
 
 	def getElevSwitchOneStatus(self):
 		pass
