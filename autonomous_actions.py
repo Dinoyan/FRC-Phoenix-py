@@ -13,15 +13,21 @@ class AutonomousActions():
 				drivetrain.moveRobot(RobotConstant.DRIVE_TURNING_SPEED2, RobotConstant.DRIVE_TURNING_SPEED2)
 			else:
 				rivetrain.moveRobot(RobotConstant.DRIVE_DRIVING_SPEED, -RobotConstant.DRIVE_DRIVING_SPEED)
+		drivetrain.moveRobot(RobotConstant.DRIVE_ZERO_SPEED, RobotConstant.DRIVE_ZERO_SPEED)
 
 	def turnRight(drivetrain, sensors, angle):
-		pass
+		while (angle > sensors.getCurrentAngle()):
+			drivetrain.moveRobot(RobotConstant.DRIVE_TURNING_SPEED, RobotConstant.DRIVE_TURNING_SPEED)
+		drivetrain.moveRobot(RobotConstant.DRIVE_ZERO_SPEED, RobotConstant.DRIVE_ZERO_SPEED)
 
 	def turnLeft(drivetrain, sensors, angle):
-		pass
+		while (angle < sensorHandler.getAhrs().getAngle()):
+			drivetrain.moveRobot(-RobotConstant.DRIVE_TURNING_SPEED, -RobotConstant.DRIVE_TURNING_SPEED);
+		
+		drivetrain.moveRobot(RobotConstant.DRIVE_ZERO_SPEED, RobotConstant.DRIVE_ZERO_SPEED)
 
 	def dropCube(intake):
-		pass
+		intake.vomitCube()
 
 	def liftCubeSwitch(elev):
 		pass
