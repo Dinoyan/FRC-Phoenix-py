@@ -24,7 +24,7 @@ class Intake():
 
 	def controlIntakeSolenoids(state):
 		self.operateIntake.set(state)
-		self.closeIntake.set(!state)
+		self.closeIntake.set(not state)
 
 	def controlIntakeMotors(speed):
 		self.rightIntake.set(speed)
