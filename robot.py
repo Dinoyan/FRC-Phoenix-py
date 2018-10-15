@@ -2,12 +2,14 @@ import wpilib
 import drivetrain
 import elevator
 import intake
+import robot_constant
 import sensor_handler
 import Autonomous_mode_handler
 from wpilib.drive import DifferentialDrive
 
 class MyRobot(wpilib.IterativeRobot):
     '''Main robot class'''
+
 
 
     def robotInit(self):
@@ -19,10 +21,10 @@ class MyRobot(wpilib.IterativeRobot):
         self.auto = Autonomous_mode_handler.AutonomousModeHandler(self.drivetrain, self.sensors,self.elevator, self.intakeHandler)
 
         self.chooser = wpilib.SendableChooser()
-        self.chooser.addObject('center', '1')
-        self.chooser.addObject('left', '2')
-        self.chooser.addObject('right', '3')
-        self.chooser.addObject('default', '0')
+        self.chooser.addObject('center', 'robot_constant.CENTER_POS')
+        self.chooser.addObject('left', 'robot_constant.LEFT_POS')
+        self.chooser.addObject('right', 'robot_constant.RIGHT_POS')
+        self.chooser.addObject('default', 'robto_constant.DEFAULT')
 
         wpilib.SmartDashboard.putData('Auto Mode', self.chooser)
 
@@ -33,10 +35,13 @@ class MyRobot(wpilib.IterativeRobot):
         self.sensors.elevEncReset()
 
         self.value = self.chooser.getSelected()
+        self.gameData = wpilib.DriverStation.getInstance().getGameSpecificMessage()
+
 
     def autonomousPeriodic(self):
         '''Called every 20ms in autonomous mode'''
-        self.auto.AutoModeSelect(self.value)
+
+        self.auto.AutoModeSelect(self.value, self.gameData)
 
     def disabledInit(self):
         '''Called only at the beginning of disabled mode'''
@@ -48,14 +53,20 @@ class MyRobot(wpilib.IterativeRobot):
 
     def teleopInit(self):
         '''Called only at the beginning of teleoperated mode'''
-        self.drivetrain.autoMove()
-        self.intakeHandler.operateIntake()
-        self.elevator.operateElevator()
+     
 
 
     def teleopPeriodic(self):
         '''Called every 20ms in teleoperated mode'''
+
+        self.drivetrain.driveRobot()
+        self.intakeHandler.operateIntake()
+        self.elevator.operateElevator()
+
+    def updateDashboard(self):
         
+
+    
 
 if __name__ == '__main__':
     wpilib.run(MyRobot)
