@@ -2,8 +2,8 @@ import wpilib
 import Joystick_handler
 import robot_map
 
-class Elevator():
 
+class Elevator():
 
     def __init__(self):
         self.elevCimOne = wpilib.Talon(robot_map.ELEV_ONE)
@@ -16,4 +16,3 @@ class Elevator():
 
     def emergencyStop(self):
         pass
- 
