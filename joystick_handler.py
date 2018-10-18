@@ -13,3 +13,9 @@ class JoystickHandler():
 
     def getCubeStick(self):
         return self.cubeStick
+
+    def vibrateDriveStick():
+    	self.driveStick.setRumble(RumbleType.kRightRumble, 1)
+
+    def vibrateCubeStick():
+    	self.cubeStick.setRumble(RumbleType.kRightRumble, 1)
