@@ -1,11 +1,12 @@
 import wpilib
+import logging
 import drivetrain
 import elevator
 import intake
 import joystick_handler
 import robot_constant
 import sensor_handler
-import Autonomous_mode_handler
+import autonomous_mode_handler
 from wpilib.drive import DifferentialDrive
 
 
@@ -29,6 +30,9 @@ class MyRobot(wpilib.IterativeRobot):
         self.chooser.addObject('default', 'robto_constant.DEFAULT')
         wpilib.SmartDashboard.putData('Auto Mode', self.chooser)
 
+        logging.basicConfig(filename = 'robotLogs.log', level=logging.DEBUG)
+        logging.info("Init robot")
+
     def autonomousInit(self):
         '''Called only at the beginning of autonomous mode'''
         self.sensors.driveEncReset()
@@ -36,6 +40,9 @@ class MyRobot(wpilib.IterativeRobot):
 
         self.value = self.chooser.getSelected()
         self.gameData = wpilib.DriverStation.getInstance().getGameSpecificMessage()
+
+        logging.info("Auto init")
+
 
     def autonomousPeriodic(self):
         '''Called every 20ms in autonomous mode'''
@@ -52,6 +59,8 @@ class MyRobot(wpilib.IterativeRobot):
 
     def teleopInit(self):
         '''Called only at the beginning of teleoperated mode'''
+
+        logging.info("Teleop init")
 
     def teleopPeriodic(self):
         '''Called every 20ms in teleoperated mode'''
