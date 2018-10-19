@@ -33,6 +33,7 @@ class MyRobot(wpilib.IterativeRobot):
         logging.basicConfig(filename = 'robotLogs.log', level=logging.DEBUG)
         logging.info("Init robot")
 
+
     def autonomousInit(self):
         '''Called only at the beginning of autonomous mode'''
         self.sensors.driveEncReset()
@@ -43,11 +44,10 @@ class MyRobot(wpilib.IterativeRobot):
 
         logging.info("Auto init")
 
-
     def autonomousPeriodic(self):
         '''Called every 20ms in autonomous mode'''
-
-        self.auto.AutoModeSelect(self.value, self.gameData)
+        if(wpilib.RobotState.isAutonomous()):
+            self.auto.AutoModeSelect(self.value, self.gameData)
 
     def disabledInit(self):
         '''Called only at the beginning of disabled mode'''
@@ -65,9 +65,10 @@ class MyRobot(wpilib.IterativeRobot):
     def teleopPeriodic(self):
         '''Called every 20ms in teleoperated mode'''
 
-        self.drivetrain.driveRobot()
-        self.intakeHandler.operateIntake()
-        self.elevator.operateElevator()
+        if(wpilib.RobotState.isOperatorCOntrol()):
+            self.drivetrain.driveRobot()
+            self.intakeHandler.operateIntake()
+            self.elevator.operateElevator()
 
     def updateDashboard(self):
         pass
