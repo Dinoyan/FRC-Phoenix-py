@@ -1,6 +1,6 @@
 import wpilib
 import robot_map
-import Joystick_handler
+import joystick_handler
 
 
 class Drivetrain():
