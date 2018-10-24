@@ -7,7 +7,7 @@ import joystick_handler
 import robot_constant
 import sensor_handler
 import autonomous_mode_handler
-from wpilib.drive import DifferentialDrive
+import pathfinder as pf
 
 
 class MyRobot(wpilib.IterativeRobot):
