@@ -6,8 +6,8 @@ import intake
 import joystick_handler
 import robot_constant
 import sensor_handler
+import auto_path
 import autonomous_mode_handler
-import pathfinder as pf
 
 
 class MyRobot(wpilib.IterativeRobot):
@@ -22,6 +22,7 @@ class MyRobot(wpilib.IterativeRobot):
         self.intakeHandler = intake.Intake(self.sensors, self.joystick)
         self.auto = Autonomous_mode_handler.AutonomousModeHandler(
             self.drivetrain, self.sensors, self.elevator, self.intakeHandler)
+        self.autoPath = auto_path.AutoPath(self.sensors, self.drivetrain)
 
         self.chooser = wpilib.SendableChooser()
         self.chooser.addObject('center', 'robot_constant.CENTER_POS')
