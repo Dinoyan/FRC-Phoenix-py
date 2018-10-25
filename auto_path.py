@@ -58,11 +58,11 @@ class AutoPath():
         right = modifier.getRightTrajectory()
         
         leftFollower = pf.followers.EncoderFollower(left)
-        leftFollower.configureEncoder(self.l_encoder.get(), self.ENCODER_COUNTS_PER_REV, self.WHEEL_DIAMETER)
+        leftFollower.configureEncoder(self.sensors.getLeftDistance(), self.ENCODER_COUNTS_PER_REV, self.WHEEL_DIAMETER)
         leftFollower.configurePIDVA(1.0, 0.0, 0.0, 1 / self.MAX_VELOCITY, 0)
         
         rightFollower = pf.followers.EncoderFollower(right)
-        rightFollower.configureEncoder(self.r_encoder.get(), self.ENCODER_COUNTS_PER_REV, self.WHEEL_DIAMETER)
+        rightFollower.configureEncoder(self.sensors.getRightDistance(), self.ENCODER_COUNTS_PER_REV, self.WHEEL_DIAMETER)
         rightFollower.configurePIDVA(1.0, 0.0, 0.0, 1 / self.MAX_VELOCITY, 0)
         
         self.leftFollower = leftFollower
@@ -70,5 +70,22 @@ class AutoPath():
 
 
 	def run(self):
+
+        l = self.leftFollower.calculate(self.l_encoder.get())
+        r = self.rightFollower.calculate(self.r_encoder.get())
+
+        # REPLACE THIS WITH NAVX
+        gyro_heading = -self.gyro.getAngle()    # Assuming the gyro is giving a value in degrees
+        desired_heading = pf.r2d(self.leftFollower.getHeading())   # Should also be in degrees
+
+        # This is a poor man's P controller
+        angleDifference = pf.boundHalfDegrees(desired_heading - gyro_heading)
+        turn = 5 * (-1.0/80.0) * angleDifference
+        
+        l = l + turn
+        r = r - turn
+
+        # -1 is forward, so invert both values
+        self.drivetrain().moveRobot(-l, -r)
 
 
