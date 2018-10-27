@@ -1,4 +1,5 @@
 import robot_constant
+import auto_actions
 
 
 class AutonomousModeHandler():
@@ -14,7 +15,11 @@ class AutonomousModeHandler():
         if (position == robot_constant.LEFT_POS):
 
             if (gameData[1] == 'L'):
-                pass
+                auto_actions.driveForward(self.drivetrain, self.sensors, 10);
+                auto_actions.turnRight(self.drivetrain, self.sensors, 45);
+                auto_actions.driveForward(self.drivetrain, self.sensors, 2);
+                auto_actions.liftCubeScale(self.elevator);
+                auto_actions.dropCube(self.intake);
 
             else:
                 pass
