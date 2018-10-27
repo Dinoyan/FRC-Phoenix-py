@@ -71,11 +71,11 @@ class AutoPath():
 
 	def run(self):
 
-        l = self.leftFollower.calculate(self.l_encoder.get())
-        r = self.rightFollower.calculate(self.r_encoder.get())
+        l = self.leftFollower.calculate(sself.sensors.getLeftDistance())
+        r = self.rightFollower.calculate(self.sensors.getRightDistance())
 
         # REPLACE THIS WITH NAVX
-        gyro_heading = -self.gyro.getAngle()    # Assuming the gyro is giving a value in degrees
+        gyro_heading = -self.sensors.getCurrentAngle()    # Assuming the gyro is giving a value in degrees
         desired_heading = pf.r2d(self.leftFollower.getHeading())   # Should also be in degrees
 
         # This is a poor man's P controller
