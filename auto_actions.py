@@ -45,6 +45,9 @@ class AutonomousActions():
     def liftCubeScale(elev):
         pass
 
+    def zeroElev(elev):
+        pass
+
     def dropIntake(intake):
         pass
 
