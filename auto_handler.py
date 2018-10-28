@@ -55,4 +55,5 @@ class AutonomousModeHandler():
                 auto_actions.dropCube(self.intake);
 
         else:
-            pass
+            
+            auto_actions.driveForward(self.drivetrain, self.sensors, 5);
