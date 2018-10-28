@@ -37,7 +37,14 @@ class AutonomousModeHandler():
 
         elif(position == robot_constant.LEFT_POS):
             if (gameData[0] == 'L'):
-                pass
+                auto_actions.driveForward(self.drivetrain, self.sensors, 2);
+                auto_actions.turnLeft(self.drivetrain, self.sensors, 45);
+                auto_actions.driveForward(self.drivetrain, self.sensors, 2);
+                auto_actions.turnRight(self.drivetrain, self.sensors, 0);
+                auto_actions.driveForward(self.drivetrain, self.sensors, 2);
+                auto_actions.liftCubeSwitch(self.elevator);
+                auto_actions.dropCube(self.intake);
+           
             else:
                 pass
 
