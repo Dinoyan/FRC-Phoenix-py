@@ -13,6 +13,18 @@ class Elevator():
     def operateElevator(self):
         self.elevCimOne.set(self.elevStick.getY(0))
         self.elevCimTwo.set(self.elevStick.getY(0))
-
+        
+    def scalePosition(self):
+        pass
+    
+    def switchPosition(self):
+        pass
+    
+    def zeroPosition(self):
+        pass
+    
+    def climbPosition(self):
+        pass
+    
     def emergencyStop(self):
         pass
