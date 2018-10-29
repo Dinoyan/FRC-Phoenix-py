@@ -7,5 +7,5 @@ This is a python version of the 2018 FRC robot code. Check out the Java version 
 
 * Clone this repo
 * cd into the repo
-* On Linux/OSX: 'python3 robot.py deploy'
-* On Windows: 'py -3 robot.py deploy'
+* On Linux/OSX: `python3 robot.py deploy`
+* On Windows: `py -3 robot.py deploy`
