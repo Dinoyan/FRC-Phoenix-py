@@ -36,7 +36,6 @@ class Intake():
                 self.joystick.getDriveStick().getRawAxis(3) - 0.3)
 
             if (self.pdp.getCurrent(3) > 15.5 or self.pdp..getCurrent(13) > 14.5):
-                :
                 controlIntakeMotors(0)
                 controlIntakeSolenoids(True)
 
