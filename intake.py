@@ -59,3 +59,7 @@ class Intake():
     def controlIntakeMotors(speed):
         self.rightIntake.set(speed)
         self.leftIntake.set(-speed)
+        
+    def pivot():
+        pass
+        
