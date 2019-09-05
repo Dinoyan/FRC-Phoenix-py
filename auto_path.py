@@ -21,7 +21,7 @@ class AutoPath():
 	def path_init(self):
 
 		# Set up the trajectory
-        points = [
+        	points = [
             pf.Waypoint(0, 0, 0),
             pf.Waypoint(6, -6, 0),
             pf.Waypoint(11, -6, 0),
@@ -71,21 +71,21 @@ class AutoPath():
 
 	def run(self):
 
-        l = self.leftFollower.calculate(sself.sensors.getLeftDistance())
-        r = self.rightFollower.calculate(self.sensors.getRightDistance())
+		l = self.leftFollower.calculate(sself.sensors.getLeftDistance())
+		r = self.rightFollower.calculate(self.sensors.getRightDistance())
 
-        # REPLACE THIS WITH NAVX
-        gyro_heading = -self.sensors.getCurrentAngle()    # Assuming the gyro is giving a value in degrees
-        desired_heading = pf.r2d(self.leftFollower.getHeading())   # Should also be in degrees
+		# REPLACE THIS WITH NAVX
+		gyro_heading = -self.sensors.getCurrentAngle()    # Assuming the gyro is giving a value in degrees
+		desired_heading = pf.r2d(self.leftFollower.getHeading())   # Should also be in degrees
 
-        # This is a poor man's P controller
-        angleDifference = pf.boundHalfDegrees(desired_heading - gyro_heading)
-        turn = 5 * (-1.0/80.0) * angleDifference
-        
-        l = l + turn
-        r = r - turn
+		# This is a poor man's P controller
+		angleDifference = pf.boundHalfDegrees(desired_heading - gyro_heading)
+		turn = 5 * (-1.0/80.0) * angleDifference
 
-        # -1 is forward, so invert both values
-        self.drivetrain().moveRobot(-l, -r)
+		l = l + turn
+		r = r - turn
+
+		# -1 is forward, so invert both values
+		self.drivetrain().moveRobot(-l, -r)
 
 
